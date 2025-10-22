@@ -1,11 +1,13 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { AfterViewInit,ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -106,33 +108,52 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 @Component({
   selector: 'app-infotable',
-  imports: [MatTableModule, MatPaginatorModule,MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatListModule],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './infotable.component.html',
-  styleUrl: './infotable.component.sass'
+  styleUrl: './infotable.component.sass',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfotableComponent implements AfterViewInit {
+  readonly dialog = inject(MatDialog);
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: PeriodicElement | null;
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-    /** Checks whether an element is expanded. */
+  /** Checks whether an element is expanded. */
   isExpanded(element: PeriodicElement) {
     return this.expandedElement === element;
   }
 
-    /** Toggles the expanded state of an element. */
+  /** Toggles the expanded state of an element. */
   toggle(element: PeriodicElement) {
     this.expandedElement = this.isExpanded(element) ? null : element;
   }
 
-    applyFilter(event: Event) {
+  applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
