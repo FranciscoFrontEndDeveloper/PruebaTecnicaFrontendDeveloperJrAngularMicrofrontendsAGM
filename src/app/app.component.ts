@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { MainComponent } from "./components/main/main.component";
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MainComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrl: './app.component.sass',
 })
 export class AppComponent {
   title = 'PruebaTecnicaFrontendDeveloperJrAngularMicrofrontendsAGM';
