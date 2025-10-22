@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Namesgif } from '../../interfaces/namesgif';
 
 @Component({
   selector: 'app-gifinitial',
@@ -8,6 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './gifinitial.component.sass'
 })
 export class GifinitialComponent {
-@Input() gifnames: string[] = [];
+@Input() gifnames: Namesgif[] = [];
 public gifname: string = ''
 }
