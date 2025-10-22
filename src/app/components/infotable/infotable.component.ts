@@ -5,7 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
+import {MatListModule} from '@angular/material/list';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -106,7 +106,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 @Component({
   selector: 'app-infotable',
-  imports: [MatTableModule, MatPaginatorModule,MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule],
+  imports: [MatTableModule, MatPaginatorModule,MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatListModule],
   templateUrl: './infotable.component.html',
   styleUrl: './infotable.component.sass'
 })

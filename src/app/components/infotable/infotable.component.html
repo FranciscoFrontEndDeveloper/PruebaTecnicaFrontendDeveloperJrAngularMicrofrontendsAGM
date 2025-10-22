@@ -66,10 +66,31 @@
               <div class="example-element-weight">{{ element.weight }}</div>
             </div>
             <div class="example-element-description">
-              {{ element.description }}
-              <span class="example-element-description-attribution">
-                -- Wikipedia
-              </span>
+              <mat-list role="list">
+                <mat-list-item role="listitem">{{
+                  element.description
+                }}</mat-list-item>
+                <mat-list-item role="listitem">{{
+                  element.description
+                }}</mat-list-item>
+                <mat-list-item role="listitem">{{
+                  element.description
+                }}</mat-list-item>
+              </mat-list>
+              <div class="example-element-description-attribution">
+                <div class="example-button-row">
+                  <div class="example-flex-container">
+                    <button matFab extended>
+                      <mat-icon>edit</mat-icon>
+                      Editar
+                    </button>
+                    <button matFab extended>
+                      <mat-icon>delete</mat-icon>
+                      Borrar
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
