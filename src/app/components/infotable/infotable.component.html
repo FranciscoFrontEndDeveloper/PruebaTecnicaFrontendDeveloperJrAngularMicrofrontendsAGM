@@ -20,12 +20,12 @@
       </mat-paginator>
     </div>
   </div>
-<div>
+<div >
    <table
     mat-table
     [dataSource]="dataSource"
     multiTemplateDataRows
-    class="mat-elevation-z8"
+    
   >
     @for (column of columnsToDisplay; track column) {
     <ng-container matColumnDef="{{ column }}">
