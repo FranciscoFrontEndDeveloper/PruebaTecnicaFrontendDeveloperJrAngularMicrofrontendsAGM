@@ -8,5 +8,5 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './buttonmain.component.sass'
 })
 export class ButtonmainComponent {
-public titleButton: string = 'basico'
+  public titleButton: string = 'Ver mas';
 }
