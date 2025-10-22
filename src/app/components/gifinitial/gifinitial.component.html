@@ -1,8 +1,14 @@
-<div>
+<div class="gifContainer">
+ <div class="gifContainer__item">
   @for (gifname of gifnames; track gifname) {
-   <picture>
-   <p>{{ gifname.name | uppercase }}</p>
-    <img [src]="gifname.nameGif" [alt]="gifname.name" />
-  </picture>
+    <div 
+      class="gifContainer__card"
+      [style.background-image]="'url(' + gifname.nameGif + ')'"
+      [style.background-size]="'cover'"
+      [style.background-position]="'center'"
+    >
+      <p class="gifContainer__title">{{ gifname.name | uppercase }}</p>
+    </div>
   }
+</div>
 </div>
