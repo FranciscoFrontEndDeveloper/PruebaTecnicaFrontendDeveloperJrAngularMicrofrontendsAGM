@@ -7,7 +7,12 @@
       [style.background-size]="'cover'"
       [style.background-position]="'center'"
     >
-      <p class="gifContainer__title">{{ gifname.name | uppercase }}</p>
+      <div>
+       <p class="gifContainer__title">{{ gifname.name | uppercase }}</p>
+      </div>
+      <div>
+       <app-buttonmain></app-buttonmain>
+      </div>
     </div>
   }
 </div>
