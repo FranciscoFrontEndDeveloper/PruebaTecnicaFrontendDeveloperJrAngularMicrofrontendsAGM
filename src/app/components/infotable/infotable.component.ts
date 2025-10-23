@@ -3,77 +3,51 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewChild,
-  inject,
   OnInit,
 } from '@angular/core';
 
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+
 import { CaracterService } from '../../services/caracters/caracter.service';
 import { allCharactersInterface } from '../../interfaces/namesgif';
 import { ChangeDetectorRef } from '@angular/core';
 import { FilterComponent } from "../filter/filter.component";
 import { PaginatorComponent } from "../paginator/paginator.component";
+import { GenerictableComponent } from "../generictable/generictable.component";
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-infotable',
   imports: [
-    MatTableModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
     MatButtonModule,
-    MatDialogModule,
+
     FilterComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    GenerictableComponent
 ],
   templateUrl: './infotable.component.html',
   styleUrl: './infotable.component.sass',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfotableComponent  {
+export class InfotableComponent implements OnInit  {
+  public dataSource = new MatTableDataSource<allCharactersInterface>([]);
+  public columnsToDisplay: string[] = [];
+  public columnsToDisplayWithExpand: string[] = [];
   constructor(private caracterService: CaracterService, private changeDetectorRef: ChangeDetectorRef) {}
-  readonly dialog = inject(MatDialog);
-  public characters: any[] = [];
-  columnsToDisplay: string[] = [];
-  columnsToDisplayWithExpand: string[] = [];
-  expandedElement!: allCharactersInterface | null;
-  dataSource = new MatTableDataSource<allCharactersInterface>([]);
-  
-
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.loadCaracters();
   }
-
-
-  /** Checks whether an element is expanded. */
-  isExpanded(element: allCharactersInterface) {
-    return this.expandedElement === element;
-  }
-
-  /** Toggles the expanded state of an element. */
-  toggle(element: allCharactersInterface) {
-    this.expandedElement = this.isExpanded(element) ? null : element;
-  }
-
-
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
   loadCaracters() {
     this.caracterService.getAllCaracters().subscribe((data) => {
       this.dataSource.data = data;
