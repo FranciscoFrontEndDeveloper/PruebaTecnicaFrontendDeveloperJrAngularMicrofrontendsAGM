@@ -37,7 +37,7 @@ import { ButtoniconComponent } from '../buttonicon/buttonicon.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfotableComponent implements OnInit {
-  public title = 'Personaje';
+  public title = 'Crear Personaje';
   public dataSource = new MatTableDataSource<allCharactersInterface>([]);
   public columnsToDisplay: string[] = [];
   public columnsToDisplayWithExpand: string[] = [];

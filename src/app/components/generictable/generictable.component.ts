@@ -4,10 +4,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { allCharactersInterface } from '../../interfaces/namesgif';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-generictable',
-  imports: [MatIcon, MatTableModule, MatDialogModule,     MatDialogModule,],
+  imports: [MatIcon, MatTableModule, MatDialogModule,     MatDialogModule,MatButtonModule, MatIconModule],
   templateUrl: './generictable.component.html',
   styleUrl: './generictable.component.sass'
 })
