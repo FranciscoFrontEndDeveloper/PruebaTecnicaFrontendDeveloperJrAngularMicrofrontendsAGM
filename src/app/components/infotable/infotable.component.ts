@@ -6,7 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,11 +19,11 @@ import { CaracterService } from '../../services/caracters/caracter.service';
 import { allCharactersInterface } from '../../interfaces/namesgif';
 import { ChangeDetectorRef } from '@angular/core';
 import { FilterComponent } from "../filter/filter.component";
+import { PaginatorComponent } from "../paginator/paginator.component";
 @Component({
   selector: 'app-infotable',
   imports: [
     MatTableModule,
-    MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
@@ -31,13 +31,14 @@ import { FilterComponent } from "../filter/filter.component";
     MatListModule,
     MatButtonModule,
     MatDialogModule,
-    FilterComponent
+    FilterComponent,
+    PaginatorComponent
 ],
   templateUrl: './infotable.component.html',
   styleUrl: './infotable.component.sass',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfotableComponent implements AfterViewInit {
+export class InfotableComponent  {
   constructor(private caracterService: CaracterService, private changeDetectorRef: ChangeDetectorRef) {}
   readonly dialog = inject(MatDialog);
   public characters: any[] = [];
@@ -45,16 +46,14 @@ export class InfotableComponent implements AfterViewInit {
   columnsToDisplayWithExpand: string[] = [];
   expandedElement!: allCharactersInterface | null;
   dataSource = new MatTableDataSource<allCharactersInterface>([]);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.loadCaracters();
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+
 
   /** Checks whether an element is expanded. */
   isExpanded(element: allCharactersInterface) {
