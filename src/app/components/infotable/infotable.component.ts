@@ -17,7 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { CaracterService } from '../../services/caracters/caracter.service';
 import { allCharactersInterface } from '../../interfaces/namesgif';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-infotable',
   imports: [
@@ -36,11 +36,11 @@ import { allCharactersInterface } from '../../interfaces/namesgif';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfotableComponent implements AfterViewInit {
-  constructor(private caracterService: CaracterService) {}
+  constructor(private caracterService: CaracterService, private changeDetectorRef: ChangeDetectorRef) {}
   readonly dialog = inject(MatDialog);
   public characters: any[] = [];
   columnsToDisplay: string[] = [];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  columnsToDisplayWithExpand: string[] = [];
   expandedElement!: allCharactersInterface | null;
   dataSource = new MatTableDataSource<allCharactersInterface>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,7 +48,6 @@ export class InfotableComponent implements AfterViewInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log('hola pacho');
     this.loadCaracters();
   }
   ngAfterViewInit() {
@@ -90,7 +89,8 @@ export class InfotableComponent implements AfterViewInit {
           key !== 'location' &&
           key !== 'image'
       );
-      console.log(this.columnsToDisplay);
+      this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+      this.changeDetectorRef.markForCheck();
     });
   }
 }
