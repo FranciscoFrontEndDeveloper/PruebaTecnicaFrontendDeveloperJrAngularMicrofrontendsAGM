@@ -1,15 +1,7 @@
 <div class="mat-elevation-z8">
   <div>
     <div>
-      <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input
-          matInput
-          (keyup)="applyFilter($event)"
-          placeholder="Ex. ium"
-          #input
-        />
-      </mat-form-field>
+      <app-filter></app-filter>
     </div>
     <div>
       <mat-paginator

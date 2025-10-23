@@ -18,6 +18,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { CaracterService } from '../../services/caracters/caracter.service';
 import { allCharactersInterface } from '../../interfaces/namesgif';
 import { ChangeDetectorRef } from '@angular/core';
+import { FilterComponent } from "../filter/filter.component";
 @Component({
   selector: 'app-infotable',
   imports: [
@@ -30,7 +31,8 @@ import { ChangeDetectorRef } from '@angular/core';
     MatListModule,
     MatButtonModule,
     MatDialogModule,
-  ],
+    FilterComponent
+],
   templateUrl: './infotable.component.html',
   styleUrl: './infotable.component.sass',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -64,10 +66,7 @@ export class InfotableComponent implements AfterViewInit {
     this.expandedElement = this.isExpanded(element) ? null : element;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
