@@ -1,13 +1,20 @@
 <div class="mat-elevation-z8">
-  <div>
+  <div class="navMenu">
     <div>
       <app-filter></app-filter>
+    </div>
+    <div>
+      <app-buttonicon [title]="title"></app-buttonicon>
     </div>
     <div>
       <app-paginator></app-paginator>
     </div>
   </div>
   <div>
-    <app-generictable [dataSource]="dataSource" [columnsToDisplay]="columnsToDisplay" [columnsToDisplayWithExpand]="columnsToDisplayWithExpand"></app-generictable>
+    <app-generictable
+      [dataSource]="dataSource"
+      [columnsToDisplay]="columnsToDisplay"
+      [columnsToDisplayWithExpand]="columnsToDisplayWithExpand"
+    ></app-generictable>
   </div>
 </div>
