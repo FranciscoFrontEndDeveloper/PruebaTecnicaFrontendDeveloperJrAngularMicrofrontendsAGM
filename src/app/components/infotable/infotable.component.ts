@@ -4,6 +4,7 @@ import {
   Component,
   ViewChild,
   OnInit,
+  inject,
 } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +20,8 @@ import { PaginatorComponent } from '../paginator/paginator.component';
 import { GenerictableComponent } from '../generictable/generictable.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { ButtoniconComponent } from '../buttonicon/buttonicon.component';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-infotable',
   imports: [
@@ -37,10 +40,12 @@ import { ButtoniconComponent } from '../buttonicon/buttonicon.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfotableComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
   public title = 'Crear Personaje';
   public dataSource = new MatTableDataSource<allCharactersInterface>([]);
   public columnsToDisplay: string[] = [];
   public columnsToDisplayWithExpand: string[] = [];
+  public originalKeys: string[] = [];
   constructor(
     private caracterService: CaracterService,
     private changeDetectorRef: ChangeDetectorRef
@@ -53,6 +58,7 @@ export class InfotableComponent implements OnInit {
   loadCaracters() {
     this.caracterService.getAllCaracters().subscribe((data) => {
       this.dataSource.data = data;
+      this.originalKeys = Object.keys(data[0]).filter((key)=>key !== 'id')
       this.columnsToDisplay = Object.keys(data[0]).filter(
         (key) =>
           key !== 'episode' &&
@@ -67,4 +73,12 @@ export class InfotableComponent implements OnInit {
       this.changeDetectorRef.markForCheck();
     });
   }
+
+     openDialog() {
+       const dialogRef = this.dialog.open(DialogComponent, {data: {fields: this.originalKeys}});
+       
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(`Dialog result: ${result}`);
+      });
+    }
 }

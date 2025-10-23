@@ -1,15 +1,12 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Crear Personaje</h2>
 <mat-dialog-content class="mat-typography">
-  
-   <mat-form-field appearance="outline">
-    <mat-label>Outline form field</mat-label>
-    <input matInput placeholder="Placeholder">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
-  
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button matButton mat-dialog-close>Cancel</button>
-  <button matButton [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>
+  <form action="">
+    @for (item of data.fields; track $index) {
+      <app-formcreation [field]="item"></app-formcreation>
+    }
+  </form>
+    <mat-dialog-actions align="end">
+      <button matButton mat-dialog-close>Cancel</button>
+      <button matButton [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
