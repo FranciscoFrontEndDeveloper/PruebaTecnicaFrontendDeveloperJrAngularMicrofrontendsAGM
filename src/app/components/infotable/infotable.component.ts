@@ -1,4 +1,11 @@
-import { AfterViewInit,ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ViewChild,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,86 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
-}
+import { CaracterService } from '../../services/caracters/caracter.service';
+import { allCharactersInterface } from '../../interfaces/namesgif';
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    position: 1,
-    name: 'Hydrogen',
-    weight: 1.0079,
-    symbol: 'H',
-    description: `Hydrogen is a chemical element. `,
-  },
-  {
-    position: 2,
-    name: 'Helium',
-    weight: 4.0026,
-    symbol: 'He',
-    description: `Helium is a chemical element. `,
-  },
-  {
-    position: 3,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element. `,
-  },
-  {
-    position: 4,
-    name: 'Beryllium',
-    weight: 9.0122,
-    symbol: 'Be',
-    description: `Beryllium is a chemical element. `,
-  },
-  {
-    position: 5,
-    name: 'Boron',
-    weight: 10.811,
-    symbol: 'B',
-    description: `Boron is a chemical element. `,
-  },
-  {
-    position: 6,
-    name: 'Carbon',
-    weight: 12.0107,
-    symbol: 'C',
-    description: `Carbon is a chemical element. `,
-  },
-  {
-    position: 7,
-    name: 'Nitrogen',
-    weight: 14.0067,
-    symbol: 'N',
-    description: `Nitrogen is a chemical element. `,
-  },
-  {
-    position: 8,
-    name: 'Oxygen',
-    weight: 15.9994,
-    symbol: 'O',
-    description: `Oxygen is a chemical element. `,
-  },
-  {
-    position: 9,
-    name: 'Fluorine',
-    weight: 18.9984,
-    symbol: 'F',
-    description: `Fluorine is a chemical element. `,
-  },
-  {
-    position: 10,
-    name: 'Neon',
-    weight: 20.1797,
-    symbol: 'Ne',
-    description: `Neon is a chemical element. `,
-  },
-];
 @Component({
   selector: 'app-infotable',
   imports: [
@@ -106,24 +36,32 @@ const ELEMENT_DATA: PeriodicElement[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfotableComponent implements AfterViewInit {
+  constructor(private caracterService: CaracterService) {}
   readonly dialog = inject(MatDialog);
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  public characters: any[] = [];
+  columnsToDisplay: string[] = [];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: PeriodicElement | null;
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  expandedElement!: allCharactersInterface | null;
+  dataSource = new MatTableDataSource<allCharactersInterface>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    console.log('hola pacho');
+    this.loadCaracters();
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
   /** Checks whether an element is expanded. */
-  isExpanded(element: PeriodicElement) {
+  isExpanded(element: allCharactersInterface) {
     return this.expandedElement === element;
   }
 
   /** Toggles the expanded state of an element. */
-  toggle(element: PeriodicElement) {
+  toggle(element: allCharactersInterface) {
     this.expandedElement = this.isExpanded(element) ? null : element;
   }
 
@@ -136,6 +74,23 @@ export class InfotableComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  loadCaracters() {
+    this.caracterService.getAllCaracters().subscribe((data) => {
+      this.dataSource.data = data;
+      this.columnsToDisplay = Object.keys(data[0]).filter(
+        (key) =>
+          key !== 'episode' &&
+          key !== 'url' &&
+          key !== 'created' &&
+          key !== 'type' &&
+          key !== 'origin' &&
+          key !== 'location' &&
+          key !== 'image'
+      );
+      console.log(this.columnsToDisplay);
     });
   }
 }
