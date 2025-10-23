@@ -11,7 +11,7 @@
        <p class="gifContainer__title">{{ gifname.name | uppercase }}</p>
       </div>
       <div>
-       <app-buttonmain></app-buttonmain>
+       <app-buttonmain [routerApi]="gifname.name"></app-buttonmain>
       </div>
     </div>
   }

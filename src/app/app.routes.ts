@@ -4,7 +4,15 @@ import { TableexpantComponent } from './components/tableexpant/tableexpant.compo
 export const routes: Routes = [
  { path: '', component: MainComponent },
  {
-  path: 'caracters', 
+  path: 'characters', 
+  loadComponent: () => import('./components/tableexpant/tableexpant.component').then(m => m.TableexpantComponent)
+ },
+  {
+  path: 'locations', 
+  loadComponent: () => import('./components/tableexpant/tableexpant.component').then(m => m.TableexpantComponent)
+ },
+   {
+  path: 'episodes', 
   loadComponent: () => import('./components/tableexpant/tableexpant.component').then(m => m.TableexpantComponent)
  }
 ];
