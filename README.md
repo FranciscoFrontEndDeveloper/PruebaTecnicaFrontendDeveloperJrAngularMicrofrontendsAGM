@@ -1,59 +1,75 @@
-# PruebaTecnicaFrontendDeveloperJrAngularMicrofrontendsAGM
+# Rick and Morty API REST Test
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
 
-## Development server
+## Descripción
 
-To start a local development server, run:
+*Este proyecto fue desarrollado con el objetivo de consumir una API REST pública (la API de Rick and Morty) y demostrar mis habilidades en el manejo de Angular.
+La aplicación permite listar personajes, crear nuevos basados en atributos existentes y almacenarlos localmente usando Local Storage en lugar de un backend real.
+En teoría, solo sería necesario desacoplar el servicio de Local Storage y conectarlo a un backend correspondiente para lograr persistencia real.*  
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Tecnologías utilizadas
 
-```bash
-ng generate component component-name
-```
+* Angular 19
+* Angular Material
+* RxJS
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Funcionalidades principales
 
-```bash
-ng generate --help
-```
+* Listado de personajes obtenidos desde la API de Rick and Morty.
+* Creación de nuevos personajes reutilizando los atributos disponibles.
+* Almacenamiento local de personajes creados (Local Storage).
+* Base lista para integración con backend (solo requiere desacoplar el servicio).
+* Pruebas unitarias optimizadas con un único test que evalúa la creación de componentes.
 
-## Building
+### Instalación y ejecución
 
-To build the project run:
+* Clonar este repositorio
+    * git clone https://github.com/tuusuario/rick-and-morty-api-rest-test.git
+* Instalar dependencias
+    * npm install
+* Ejecutar el proyecto
+    * ng serve
+* Abrir en el navegador: http://localhost:4200
 
-```bash
-ng build
-```
+### Estructura del proyecto
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+El proyecto está organizado en varios componentes modulares y reutilizables.
+Durante el desarrollo me enfoqué en reutilizar los componentes más pequeños (como los inputs de formularios).
+Intenté reutilizar un componente completo, pero descubrí que podía convertirse en un “embudo” que dificultaría el flujo general de la aplicación, así que opté por un enfoque más granular y flexible.
 
-## Running unit tests
+### Pruebas unitarias
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Durante la planificación noté que crear pruebas individuales para cada componente era redundante.
+Para evitar repetir código, implementé una sola prueba genérica que evalúa el mismo criterio en todos los componentes:
 
-```bash
-ng test
-```
+“¿El componente se crea correctamente?”
 
-## Running end-to-end tests
+Aunque algunas pruebas fallan y otras pasan, esta experiencia me permitió validar la viabilidad del enfoque y la importancia de la eficiencia en el testing.
 
-For end-to-end (e2e) testing, run:
+## Lecciones aprendidas
 
-```bash
-ng e2e
-```
+Aunque ya tenía experiencia reutilizando componentes, este proyecto reforzó algo importante:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Cuando se domina la reutilización de componentes, el ahorro de tiempo y esfuerzo es significativo.
 
-## Additional Resources
+Además, reafirmé la importancia de estructurar el código con escalabilidad en mente desde el principio.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Futuras mejoras
+
+* Módulo de edición de personajes.
+* Implementación de filtros de búsqueda.
+* Base lista para integración con backend (solo requiere desacoplar el servicio).
+* Paginador funcional.
+* Nuevas rutas para episodios y lugares.
+
+### Créditos y agradecimientos
+
+* A los creadores de la API de Rick and Morty, por ofrecer un recurso público, accesible y bien documentado.
+* A ChatGPT, por su asistencia durante el desarrollo, que me permitió ahorrar tiempo y mantener un flujo de trabajo más ordenado.
+* Tambien quisiera agradecer a Apex Global Mobility por tenermen en cuenta para la oferta y por permitirme poner a prueba mi habilidad en angular.
+
+
+
