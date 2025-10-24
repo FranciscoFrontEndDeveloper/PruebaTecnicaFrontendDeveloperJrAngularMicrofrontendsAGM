@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>Crear Personaje</h2>
 <mat-dialog-content class="mat-typography">
-  <form action="">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     @for (item of data.fields; track $index) {
-      <app-formcreation [field]="item"></app-formcreation>
+      <app-formcreation [field]="item" [formGroup]="form"></app-formcreation>
     }
     <mat-dialog-actions align="end">
-      <button matButton mat-dialog-close>Cancel</button>
-      <button matButton [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+      <button matButton mat-dialog-close>Cerrar</button>
+      <button matButton type="submit">Enviar</button>
     </mat-dialog-actions>
   </form>
   </mat-dialog-content>
