@@ -41,10 +41,8 @@ export class GenerictableComponent {
   }
 
   openDialog() {
-    console.log('modal edicion');
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 }

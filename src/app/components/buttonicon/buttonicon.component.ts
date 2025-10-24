@@ -13,11 +13,5 @@ export class ButtoniconComponent {
   @Input('title') title: string = '';
   readonly dialog = inject(MatDialog);
   
-  //  openDialog() {
-  //     const dialogRef = this.dialog.open(DialogComponent);
-  //     dialogRef.afterClosed().subscribe((result) => {
-  //       console.log(`Dialog result: ${result}`);
-  //     });
-  //   }
   
 }

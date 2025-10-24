@@ -78,7 +78,6 @@ export class InfotableComponent implements OnInit {
        const dialogRef = this.dialog.open(DialogComponent, {data: {fields: this.originalKeys}});
        
       dialogRef.afterClosed().subscribe((result) => {
-        console.log(`Dialog result: ${result}`);
       });
     }
 }

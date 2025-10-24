@@ -60,7 +60,6 @@ export class DialogComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value);
     this.caractercreationService.saveForData(this.form.value);
     this.matDialogRef.close(this.form.value);
     this.matSnackBar.open(
