@@ -67,7 +67,7 @@ export class DialogComponent {
       'Tu informacion se ha guardado en el localstorage',
       'cerrar',
       {
-        duration:5000,
+        duration:10000,
         horizontalPosition: 'center',
         verticalPosition: 'top'
       }
