@@ -5,9 +5,10 @@ import { allCharactersInterface } from '../../interfaces/namesgif';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
 @Component({
   selector: 'app-generictable',
-  imports: [MatIcon, MatTableModule, MatDialogModule,     MatDialogModule,MatButtonModule, MatIconModule],
+  imports: [MatIcon, MatTableModule, MatDialogModule,     MatDialogModule,MatButtonModule, MatIconModule, MatListModule],
   templateUrl: './generictable.component.html',
   styleUrl: './generictable.component.sass'
 })
