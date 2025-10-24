@@ -1,6 +1,27 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
-    <mat-drawer-content
-      ><app-infotable></app-infotable>
-     </mat-drawer-content>
-    </mat-drawer-container>
+  <!-- Drawer lateral -->
+  <mat-drawer
+    #drawer
+    [mode]="drawerMode"
+    [opened]="drawerOpened"
+    class="side-drawer"
+  >
+    <div class="drawer-content">
+      Drawer content
+    </div>
+  </mat-drawer>
+
+  <!-- Contenido principal -->
+  <mat-drawer-content>
+    <button
+      mat-icon-button
+      class="menu-button"
+      (click)="drawer.toggle()"
+      *ngIf="isMobile"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <app-infotable></app-infotable>
+  </mat-drawer-content>
+</mat-drawer-container>
