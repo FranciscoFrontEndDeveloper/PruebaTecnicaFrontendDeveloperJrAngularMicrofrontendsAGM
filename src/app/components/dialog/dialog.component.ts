@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { CaractercreationService } from '../../services/caracters/caractercreation.service';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-dialog',
   imports: [
@@ -20,6 +20,7 @@ import { CaractercreationService } from '../../services/caracters/caractercreati
     MatIconModule,
     FormcreationComponent,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dialog.component.html',
@@ -31,7 +32,8 @@ export class DialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { fields: string[] },
     private formBuilder: FormBuilder,
     private caractercreationService: CaractercreationService,
-    private matDialogRef: MatDialogRef<DialogComponent>
+    private matDialogRef: MatDialogRef<DialogComponent>,
+    private matSnackBar: MatSnackBar
   ) {
     this.form = this.formBuilder.group({
       created: '',
@@ -61,5 +63,14 @@ export class DialogComponent {
     console.log(this.form.value);
     this.caractercreationService.saveForData(this.form.value);
     this.matDialogRef.close(this.form.value);
+    this.matSnackBar.open(
+      'Tu informacion se ha guardado en el localstorage',
+      'cerrar',
+      {
+        duration:5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      }
+    );
   }
 }
